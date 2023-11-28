@@ -15,8 +15,19 @@ const rulik = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://muybuen.coffee"),
   title: "Muy Buen Coffee",
   description: "Find buen coffee, make buen coffee.",
+  openGraph: {
+    images: "/images/og.png",
+  },
+  icons: [
+    {
+      rel: "icon",
+      type: "image/png",
+      url: "/favicon.png",
+    },
+  ],
 };
 
 export default function RootLayout({

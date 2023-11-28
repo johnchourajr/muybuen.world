@@ -55,9 +55,9 @@ export const RecipesList: React.FC<RecipesListProps> = ({ ...extra }) => {
                 <Image
                   src={recipe.background}
                   alt={recipe.title}
-                  layout="fill"
-                  objectFit="contain"
-                  className="absolute"
+                  className="absolute object-contain w-full h-full"
+                  fill={true}
+                  sizes="18rem"
                 />
               </MotionLink>
             );
