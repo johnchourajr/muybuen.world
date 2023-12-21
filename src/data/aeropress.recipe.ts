@@ -1,7 +1,7 @@
 // "use client";
 
-import { aeropressMath } from "@/lib/buen-func/aeropressMath";
-import { Recipe } from "@/types/recipeData.types";
+import { aeropressMath } from "@/lib/buen-func/aeropressMath"
+import { Recipe } from "@/types/recipeData.types"
 
 const aeropressRecipe: Recipe = {
   title: "Aeropress",
@@ -118,6 +118,6 @@ const aeropressRecipe: Recipe = {
     },
   ],
   long_steps: "...",
-};
+}
 
-export default aeropressRecipe;
+export default aeropressRecipe

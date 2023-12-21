@@ -1,5 +1,5 @@
-import { RecipesList } from "@/components/recipes-list";
-import PageHeader from "@/components/page-header";
+import { RecipesList } from "@/components/recipes-list"
+import PageHeader from "@/components/page-header"
 
 export default function RecipesPage() {
   return (
@@ -10,5 +10,5 @@ export default function RecipesPage() {
       </PageHeader>
       <RecipesList />
     </>
-  );
+  )
 }

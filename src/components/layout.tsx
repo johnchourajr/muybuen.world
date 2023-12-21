@@ -1,7 +1,7 @@
-import Head from "next/head";
-import { AnimatedHeader } from "./animated-text";
-import { Nav } from "./globals/nav";
-import { Footer } from "./globals/footer";
+import Head from "next/head"
+import { AnimatedHeader } from "./animated-text"
+import { Nav } from "./globals/nav"
+import { Footer } from "./globals/footer"
 
 export interface LayoutProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -21,5 +21,5 @@ export const Layout: React.FC<LayoutProps> = ({ children, ...extra }) => {
       <main className="min-h-screen">{children}</main>
       <Footer />
     </>
-  );
-};
+  )
+}

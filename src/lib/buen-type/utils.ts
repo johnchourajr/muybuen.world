@@ -11,21 +11,22 @@ export function clampBuilder(
   minWidthPx: number,
   maxWidthPx: number,
   minFontSize: number,
-  maxFontSize: number
+  maxFontSize: number,
 ): string {
   if (minWidthPx < 0 || maxWidthPx < 0 || minFontSize < 0 || maxFontSize < 0) {
-    throw new Error("All parameters must be non-negative numbers.");
+    throw new Error("All parameters must be non-negative numbers.")
   }
 
-  const minWidth = minWidthPx / 16;
-  const maxWidth = maxWidthPx / 16;
+  const minWidth = minWidthPx / 16
+  const maxWidth = maxWidthPx / 16
 
-  const slope = (maxFontSize - minFontSize) / (maxWidth - minWidth);
-  const yAxisIntersection = -minWidth * slope + minFontSize;
+  const slope = (maxFontSize - minFontSize) / (maxWidth - minWidth)
+  const yAxisIntersection = -minWidth * slope + minFontSize
 
-  return `clamp(${minFontSize}rem, ${yAxisIntersection}rem + ${slope * 100}vw, ${maxFontSize}rem)`;
+  return `clamp(${minFontSize}rem, ${yAxisIntersection}rem + ${
+    slope * 100
+  }vw, ${maxFontSize}rem)`
 }
-
 
 /**
  * Calculates the modular scale of a base value, given a ratio and the number of iterations.
@@ -37,8 +38,8 @@ export function clampBuilder(
  */
 export function ms(base: number, ratio: number, n: number): number {
   if (base < 0 || ratio < 0) {
-    throw new Error("Base and ratio must be non-negative numbers.");
+    throw new Error("Base and ratio must be non-negative numbers.")
   }
 
-  return base * Math.pow(ratio, n);
+  return base * Math.pow(ratio, n)
 }

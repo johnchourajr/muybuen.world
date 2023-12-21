@@ -1,20 +1,20 @@
-"use client";
+"use client"
 
-import type { Ingredient, Recipe } from "@/types/recipeData.types";
-import { debounce } from "@/utils/debounce";
-import { useEffect, useState } from "react";
+import type { Ingredient, Recipe } from "@/types/recipeData.types"
+import { debounce } from "@/utils/debounce"
+import { useEffect, useState } from "react"
 
 const checkIsPrimaryFactor = (primaryFactor: any, id: any) => {
   return Array.isArray(primaryFactor)
     ? primaryFactor.includes(id)
-    : primaryFactor === id;
-};
+    : primaryFactor === id
+}
 
 interface RecipeListProps {
-  ingredients: Ingredient[];
-  calcState: any;
-  handleInputChange?: any;
-  primaryFactor: Recipe["primaryFactor"];
+  ingredients: Ingredient[]
+  calcState: any
+  handleInputChange?: any
+  primaryFactor: Recipe["primaryFactor"]
 }
 
 const RecipeList: React.FC<RecipeListProps> = ({
@@ -26,8 +26,8 @@ const RecipeList: React.FC<RecipeListProps> = ({
     <div className="grid-container my-8">
       {ingredients.map(
         ({ id, label, type, value, prefix, suffix }: Ingredient) => {
-          const isPrimaryFactor = checkIsPrimaryFactor(primaryFactor, id);
-          if (isPrimaryFactor) return null;
+          const isPrimaryFactor = checkIsPrimaryFactor(primaryFactor, id)
+          if (isPrimaryFactor) return null
 
           return (
             <div key={label} className="col-span-full my-4">
@@ -40,12 +40,12 @@ const RecipeList: React.FC<RecipeListProps> = ({
                 {suffix}
               </output>
             </div>
-          );
-        }
+          )
+        },
       )}
     </div>
-  );
-};
+  )
+}
 
 const RecipesInputs: React.FC<RecipeListProps> = ({
   ingredients,
@@ -67,16 +67,16 @@ const RecipesInputs: React.FC<RecipeListProps> = ({
           labelOverride,
           ...rest
         }: Ingredient) => {
-          const isPrimaryFactor = checkIsPrimaryFactor(primaryFactor, id);
-          if (!isPrimaryFactor) return null;
+          const isPrimaryFactor = checkIsPrimaryFactor(primaryFactor, id)
+          if (!isPrimaryFactor) return null
 
           const labelString = `${prefix || ""}${calcState[id] || value || 0}${
             suffix || ""
-          }`;
+          }`
 
           const output = labelOverride
             ? calcState.outputOverride || 0
-            : labelString;
+            : labelString
 
           return (
             <div
@@ -109,17 +109,17 @@ const RecipesInputs: React.FC<RecipeListProps> = ({
                 )}
               </div>
             </div>
-          );
-        }
+          )
+        },
       )}
     </div>
-  );
-};
+  )
+}
 
 interface RecipeFormProps {
-  ingredients: Ingredient[];
-  func: Recipe["func"];
-  primaryFactor: Recipe["primaryFactor"];
+  ingredients: Ingredient[]
+  func: Recipe["func"]
+  primaryFactor: Recipe["primaryFactor"]
 }
 
 const RecipeForm: React.FC<RecipeFormProps> = ({
@@ -127,64 +127,64 @@ const RecipeForm: React.FC<RecipeFormProps> = ({
   func,
   primaryFactor,
 }: any) => {
-  const [editableState, setEditableState] = useState({} as any);
+  const [editableState, setEditableState] = useState({} as any)
   const [calcState, setCalcState] = useState({
     ...func({ coffeeGrams: 0 }),
-  });
+  })
 
   const getInputs = () => {
-    return ingredients.find((ingredient: Ingredient) => !ingredient.locked);
-  };
+    return ingredients.find((ingredient: Ingredient) => !ingredient.locked)
+  }
 
   const updateUrlParams = (newState: any) => {
-    const url = new URL(window.location.href);
-    const params = new URLSearchParams();
+    const url = new URL(window.location.href)
+    const params = new URLSearchParams()
 
     Object.keys(newState).forEach((key) => {
-      params.set(key, newState[key]);
-    });
+      params.set(key, newState[key])
+    })
 
-    window.history.replaceState({}, "", `${url.pathname}?${params}`);
-  };
+    window.history.replaceState({}, "", `${url.pathname}?${params}`)
+  }
 
   const handleNewState = (newState: any) => {
     setEditableState({
       ...editableState,
       ...newState,
-    });
+    })
     setCalcState({
       ...func(editableState),
-    });
+    })
     // console.log("handleNewState", newState);
-  };
+  }
 
   useEffect(() => {
-    const inputs = getInputs();
+    const inputs = getInputs()
 
-    if (!inputs) return;
-    const { id, value } = inputs;
-    const newValue = Number(value);
+    if (!inputs) return
+    const { id, value } = inputs
+    const newValue = Number(value)
 
     handleNewState({
       [id]: newValue,
-    });
-  }, [ingredients]);
+    })
+  }, [ingredients])
 
   useEffect(() => {
     updateUrlParams({
       ...editableState,
-    });
+    })
 
     setCalcState({
       ...func(editableState),
-    });
+    })
 
     // console.log("useEffect", editableState, calcState);
-  }, [editableState, func]);
+  }, [editableState, func])
 
   const handleInputChange = (e: any) => {
-    e.preventDefault();
-    const { id, value } = e.target;
+    e.preventDefault()
+    const { id, value } = e.target
     // console.log({
     //   change: `Input changed: ${id}, Value: ${value}`,
     //   calcState,
@@ -194,11 +194,11 @@ const RecipeForm: React.FC<RecipeFormProps> = ({
 
     const newEditableState = {
       [id]: Number(value),
-    };
+    }
 
-    debounce(handleNewState(newEditableState), 1000, false);
-    debounce(updateUrlParams(newEditableState), 1000, false);
-  };
+    debounce(handleNewState(newEditableState), 1000, false)
+    debounce(updateUrlParams(newEditableState), 1000, false)
+  }
 
   return (
     <>
@@ -209,15 +209,15 @@ const RecipeForm: React.FC<RecipeFormProps> = ({
         {...{ ingredients, calcState, handleInputChange, primaryFactor }}
       />
     </>
-  );
-};
+  )
+}
 
 export interface RecipeTemplateProps {
-  recipe: Recipe;
+  recipe: Recipe
 }
 
 export const RecipeTemplate: React.FC<RecipeTemplateProps> = ({ recipe }) => {
-  const { title, ingredients, func, primaryFactor } = recipe;
+  const { title, ingredients, func, primaryFactor } = recipe
 
   return (
     <>
@@ -231,5 +231,5 @@ export const RecipeTemplate: React.FC<RecipeTemplateProps> = ({ recipe }) => {
 
       <RecipeForm {...{ ingredients, func, primaryFactor }} />
     </>
-  );
-};
+  )
+}

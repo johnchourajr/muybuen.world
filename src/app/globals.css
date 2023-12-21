@@ -83,6 +83,14 @@ body {
         calc(var(--mask-space) + var(--mask-inner) + var(--mask-start))
     );
   }
+
+  .test-border {
+    border: 1px solid red;
+  }
+
+  .test-border-2 {
+    border: 1px solid blue;
+  }
 }
 
 input[type="range"] {

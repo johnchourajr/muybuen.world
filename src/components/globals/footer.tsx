@@ -1,5 +1,5 @@
-import clsx from "clsx";
-import { NavLink } from "../nav-link";
+import clsx from "clsx"
+import { NavLink } from "../nav-link"
 
 export interface FooterProps {}
 
@@ -12,7 +12,7 @@ export const Footer: React.FC<FooterProps> = ({ ...extra }) => {
         </p>
         <div
           className={clsx(
-            " auto-cols-auto col-end-[end] text-end inline-flex gap-2 uppercase font-futura text-xs tracking-widest font-bold w-full justify-end"
+            " auto-cols-auto col-end-[end] text-end inline-flex gap-2 uppercase font-futura text-xs tracking-widest font-bold w-full justify-end",
           )}
         >
           <NavLink href="/about" className="">
@@ -21,5 +21,5 @@ export const Footer: React.FC<FooterProps> = ({ ...extra }) => {
         </div>
       </footer>
     </>
-  );
-};
+  )
+}

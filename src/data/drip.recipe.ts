@@ -1,7 +1,7 @@
 // "use client";
 
-import { dripMath } from "@/lib/buen-func/dripMath";
-import { Recipe } from "@/types/recipeData.types";
+import { dripMath } from "@/lib/buen-func/dripMath"
+import { Recipe } from "@/types/recipeData.types"
 
 const dripRecipe: Recipe = {
   title: "Automatic Drip",
@@ -67,6 +67,6 @@ const dripRecipe: Recipe = {
     },
   ],
   long_steps: "...",
-};
+}
 
-export default dripRecipe;
+export default dripRecipe

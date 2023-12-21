@@ -1,8 +1,8 @@
-import clsx from "clsx";
-import Link from "next/link";
+import clsx from "clsx"
+import Link from "next/link"
 
 interface NavLinkProps extends React.HTMLAttributes<HTMLAnchorElement> {
-  href: string;
+  href: string
 }
 
 export const NavLink: React.FC<NavLinkProps> = ({
@@ -19,5 +19,5 @@ export const NavLink: React.FC<NavLinkProps> = ({
     >
       {children}
     </Link>
-  );
-};
+  )
+}

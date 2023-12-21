@@ -1,5 +1,5 @@
-import * as React from "react";
-import { SVGProps } from "react";
+import * as React from "react"
+import { SVGProps } from "react"
 const Logo = (props: SVGProps<SVGSVGElement>) => (
   <svg
     width={208}
@@ -16,5 +16,5 @@ const Logo = (props: SVGProps<SVGSVGElement>) => (
       fill="#1943F5"
     />
   </svg>
-);
-export default Logo;
+)
+export default Logo

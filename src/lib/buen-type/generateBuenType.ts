@@ -1,17 +1,17 @@
-import { ms, clampBuilder } from "./utils";
+import { ms, clampBuilder } from "./utils"
 
 /**
  * Types
  */
 export interface BuenTypeOptions {
-  minWidth?: number;
-  maxWidth?: number;
-  minRatio?: number;
-  maxRatio?: number;
-  floor?: number;
-  levels?: string[];
+  minWidth?: number
+  maxWidth?: number
+  minRatio?: number
+  maxRatio?: number
+  floor?: number
+  levels?: string[]
 }
-export type BuenType = Record<string, string>;
+export type BuenType = Record<string, string>
 
 /**
  * Defaults
@@ -23,7 +23,7 @@ export const DEFAULTS = {
   maxRatio: 1.275,
   floor: 1,
   levels: ["1", "2", "3", "4", "5", "6"],
-};
+}
 
 /**
  * Generates a fluid type mapping based on viewport widths and font size ratios.
@@ -48,27 +48,27 @@ export const generateBuenType = ({
   // Construct the buenType object based on the provided options.
   const buenType: BuenType = levels.reduce((acc, level, index) => {
     // Calculate minimum and maximum font sizes for the level.
-    const min = ms(floor, minRatio, index);
-    const max = ms(floor, maxRatio, index);
+    const min = ms(floor, minRatio, index)
+    const max = ms(floor, maxRatio, index)
 
     // Build the CSS clamp function for this level.
-    acc[level] = clampBuilder(minWidth, maxWidth, min, max);
-    return acc;
-  }, {} as BuenType);
+    acc[level] = clampBuilder(minWidth, maxWidth, min, max)
+    return acc
+  }, {} as BuenType)
 
-  return buenType;
-};
+  return buenType
+}
 
 // Function to convert fluid type styles to CSS custom properties
 export function generateBuenTypeCustomProperties(
-  typeStyles: BuenType
+  typeStyles: BuenType,
 ): Record<string, string> {
-  const customProperties: Record<string, string> = {};
+  const customProperties: Record<string, string> = {}
 
   // Convert BuenType styles to custom properties
   for (const [level, clampFunction] of Object.entries(typeStyles)) {
-    customProperties[`--buen-font-size-${level}`] = clampFunction;
+    customProperties[`--buen-font-size-${level}`] = clampFunction
   }
 
-  return customProperties;
+  return customProperties
 }

@@ -1,18 +1,18 @@
-"use client";
-import { motion, useScroll, useTransform } from "framer-motion";
+"use client"
+import { motion, useScroll, useTransform } from "framer-motion"
 
 export interface ScrollXBarProps {
-  forwardRef: any;
+  forwardRef: any
 }
 
 export const ScrollXBar: React.FC<ScrollXBarProps> = ({ forwardRef }) => {
-  const { scrollXProgress } = useScroll({ container: forwardRef || undefined });
+  const { scrollXProgress } = useScroll({ container: forwardRef || undefined })
 
   const left = useTransform(
     scrollXProgress,
     [0, 1],
-    ["calc(0% - 0px)", "calc(100% - 2rem)"]
-  );
+    ["calc(0% - 0px)", "calc(100% - 2rem)"],
+  )
 
   return (
     <div className="grid-container">
@@ -25,5 +25,5 @@ export const ScrollXBar: React.FC<ScrollXBarProps> = ({ forwardRef }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
