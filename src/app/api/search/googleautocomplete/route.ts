@@ -1,6 +1,6 @@
 // app/api/search/googleautocomplete/route.ts
 
-import { rateLimit } from "@/utils/ratelimit"
+// import { rateLimit } from "@/utils/ratelimit"
 
 // const getIpAddress = (req: Request): string => {
 //   const xForwardedFor = req.headers.get("x-forwarded-for")
