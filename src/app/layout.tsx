@@ -5,6 +5,7 @@ import "./globals.css"
 import clsx from "clsx"
 import { Layout } from "@/components/layout"
 import AuthContextProvider from "@/contexts/authContext"
+import AppContextProvider from "@/contexts/appContext"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 
@@ -37,12 +38,16 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <AuthContextProvider>
-      <html lang="en">
-        <body className={clsx(inter.variable, rulik.variable, "min-h-screen")}>
-          <Layout>{children}</Layout>
-        </body>
-      </html>
-    </AuthContextProvider>
+    <AppContextProvider>
+      <AuthContextProvider>
+        <html lang="en">
+          <body
+            className={clsx(inter.variable, rulik.variable, "min-h-screen")}
+          >
+            <Layout>{children}</Layout>
+          </body>
+        </html>
+      </AuthContextProvider>
+    </AppContextProvider>
   )
 }

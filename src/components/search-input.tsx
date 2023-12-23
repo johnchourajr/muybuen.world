@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback } from "react"
 import { AnimatePresence, motion, useWillChange } from "framer-motion"
 import { useSearchParams, useRouter } from "next/navigation"
 import debounce from "lodash.debounce"
+import { AppContext } from "@/contexts/appContext"
 
 export const dynamic = "force-dynamic"
 
@@ -17,9 +18,16 @@ type SearchFormProps = {
 
 const SearchInput = ({ onSearch }: SearchFormProps) => {
   const ref = React.useRef<HTMLDivElement>(null)
+  const {
+    apiEnabledAutoComplete,
+    setApiEnabledAutoComplete,
+    apiCountAutocomplete,
+    setApiCountAutocomplete,
+  } = React.useContext(AppContext)
   const willChange = useWillChange()
 
   const [input, setInput] = useState<string>("")
+  const [apiEnabled, setApiEnabled] = useState<boolean>(true)
   const [predictions, setPredictions] = useState<Prediction[]>([])
   const [isInputFocused, setIsInputFocused] = useState<boolean>(false)
 
@@ -36,6 +44,7 @@ const SearchInput = ({ onSearch }: SearchFormProps) => {
   }, [])
 
   const fetchPredictions = async (inputValue: string) => {
+    if (!apiEnabled) return
     try {
       const response = await fetch(
         `/api/search/googleautocomplete?input=${encodeURIComponent(
@@ -47,6 +56,7 @@ const SearchInput = ({ onSearch }: SearchFormProps) => {
       }
       const data = await response.json()
       setPredictions(data.data.predictions)
+      setApiCountAutocomplete(apiCountAutocomplete + 1)
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message)

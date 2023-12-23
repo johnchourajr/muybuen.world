@@ -14,6 +14,7 @@ const buenTypePlugin = function ({ addUtilities }: any) {
     levels: ["sm", "md", "lg", "xl", "2xl", "3xl", "4xl", "5xl"] as string[] &
       Levels,
     maxRatio: 1.3,
+    minRatio: 1.2,
   }) as BuenType
   const customProperties = generateBuenTypeCustomProperties(fluidTypeStyles)
 

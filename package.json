@@ -13,14 +13,17 @@
     "clsx": "^2.0.0",
     "framer-motion": "^10.16.5",
     "lodash.debounce": "^4.0.8",
+    "lru-cache": "^10.1.0",
     "netlify-identity-widget": "^1.9.2",
     "next": "14.0.3",
     "pg": "^8.11.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/lodash.debounce": "^4.0.9",
+    "@types/lru-cache": "^7.10.10",
     "@types/netlify-identity-widget": "^1.9.6",
     "@types/node": "^20",
     "@types/pg": "^8.10.9",
