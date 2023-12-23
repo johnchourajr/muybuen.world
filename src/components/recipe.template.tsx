@@ -34,7 +34,7 @@ const RecipeList: React.FC<RecipeListProps> = ({
               <label htmlFor={id} className={"text-buen-sm flex mb-2"}>
                 {label} {isPrimaryFactor && <span>*</span>}
               </label>
-              <output id={id} className={"text-buen-xl"} data-id={id}>
+              <output id={id} className={"text-buen-2xl"} data-id={id}>
                 {prefix}
                 {calcState[id] || value || 0}
                 {suffix}
@@ -178,19 +178,11 @@ const RecipeForm: React.FC<RecipeFormProps> = ({
     setCalcState({
       ...func(editableState),
     })
-
-    // console.log("useEffect", editableState, calcState);
   }, [editableState, func])
 
   const handleInputChange = (e: any) => {
     e.preventDefault()
     const { id, value } = e.target
-    // console.log({
-    //   change: `Input changed: ${id}, Value: ${value}`,
-    //   calcState,
-    //   editableState,
-    // });
-    // console.log("handleInputChange");
 
     const newEditableState = {
       [id]: Number(value),

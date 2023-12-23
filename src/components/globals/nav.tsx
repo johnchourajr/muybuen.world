@@ -29,7 +29,7 @@ export const Nav: React.FC<NavProps> = ({ ...extra }) => {
 
   return (
     <>
-      <nav className="grid-container w-[calc(100%-1rem)] glass-card glass-card--gray py-5 items-center fixed md:sticky top-[unset] md:top-12 bottom-3 z-10 md:translate-y-[-50%] mx-2 md:mx-auto ">
+      <nav className="grid-container w-[calc(100%-1rem)] glass-card glass-card--gray py-5 items-center fixed md:sticky top-[unset] z-50 md:top-12 bottom-3 md:translate-y-[-50%] mx-2 md:mx-auto ">
         <Link href="/" aria-label="Logo">
           <LogoIcon className="col-span-1" />
         </Link>

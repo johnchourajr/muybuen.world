@@ -18,7 +18,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, ...extra }) => {
       </Head>
       <AnimatedHeader />
       <Nav />
-      <main className="min-h-screen">{children}</main>
+      <main className="pb-20">{children}</main>
       <Footer />
     </>
   )

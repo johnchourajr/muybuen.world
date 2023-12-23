@@ -1,18 +1,22 @@
 "use client"
 import { motion, useWillChange } from "framer-motion"
 import clsx from "clsx"
+import Link from "next/link"
 
 export type ResultTileProps = {
   children?: React.ReactNode
   className?: string
+  href: string
 }
 
 export const ResultTile = ({
   children,
   className,
+  href = "",
   ...extra
 }: ResultTileProps) => {
   const willChange = useWillChange()
+  const MotionLink = href ? motion(Link) : motion.div
 
   const animatedProps = children && {
     whileHover: {
@@ -25,11 +29,12 @@ export const ResultTile = ({
       duration: 0.5,
       ease: "circOut",
     },
-    style: { willChange },
+    style: { willChange } as any,
   }
 
   return (
-    <motion.div
+    <MotionLink
+      href={href}
       className={clsx(
         "glass-card glass-card--light-blue",
         "min-h-[13rem] md:min-h-[18rem] w-[13rem] md:w-[18rem]",
@@ -42,6 +47,6 @@ export const ResultTile = ({
       {...extra}
     >
       {children}
-    </motion.div>
+    </MotionLink>
   )
 }

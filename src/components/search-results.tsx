@@ -14,17 +14,21 @@ export const SearchResults = ({ searchResults }: SearchResultsProps) => {
     <>
       <ScrollXWrapper disableScroll={!searchResults}>
         {searchResults
-          ? searchResults.map((result, index) => (
-              <ResultTile key={index}>
-                <h2>{result.name}</h2>
-                <p>
-                  {result.location.display_address.map((item, i) => (
-                    <span key={i}>{item} </span>
-                  ))}
-                </p>
-              </ResultTile>
-            ))
-          : ["", "", ""].map((_, index) => <ResultTile key={index} />)}
+          ? searchResults.map((result, index) => {
+              console.log(result)
+
+              return (
+                <ResultTile key={index} href={result.url}>
+                  <h2>{result.name}</h2>
+                  <p>
+                    {result.location.display_address.map((item, i) => (
+                      <span key={i}>{item} </span>
+                    ))}
+                  </p>
+                </ResultTile>
+              )
+            })
+          : ["", "", ""].map((_, index) => <ResultTile href="" key={index} />)}
       </ScrollXWrapper>
     </>
   )
