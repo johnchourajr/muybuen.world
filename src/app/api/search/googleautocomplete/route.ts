@@ -2,23 +2,23 @@
 
 import { rateLimit } from "@/utils/ratelimit"
 
-const getIpAddress = (req: Request): string => {
-  const xForwardedFor = req.headers.get("x-forwarded-for")
-  const ipAddress = Array.isArray(xForwardedFor)
-    ? xForwardedFor[0]
-    : xForwardedFor
-  return ipAddress || "unknown"
-}
+// const getIpAddress = (req: Request): string => {
+//   const xForwardedFor = req.headers.get("x-forwarded-for")
+//   const ipAddress = Array.isArray(xForwardedFor)
+//     ? xForwardedFor[0]
+//     : xForwardedFor
+//   return ipAddress || "unknown"
+// }
 
 export async function GET(request: Request, response: Response) {
-  const ipAddress = getIpAddress(request)
+  // const ipAddress = getIpAddress(request)
 
-  if (rateLimit(ipAddress)) {
-    return new Response(JSON.stringify({ error: "Rate limit exceeded" }), {
-      status: 429,
-      headers: { "Content-Type": "application/json" },
-    })
-  }
+  // if (rateLimit(ipAddress)) {
+  //   return new Response(JSON.stringify({ error: "Rate limit exceeded" }), {
+  //     status: 429,
+  //     headers: { "Content-Type": "application/json" },
+  //   })
+  // }
 
   try {
     const { searchParams } = new URL(request.url)

@@ -116,6 +116,7 @@ const SearchInput = ({ onSearch }: SearchFormProps) => {
           "w-full p-3 px-5 border-0 focus:ring-0 focus:outline-none text-xl bg-[transparent]",
           "placeholder:text-tertiary",
         )}
+        autoFocus
       />
       <AnimatePresence>
         {isInputFocused && predictions.length > 0 && (
