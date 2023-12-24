@@ -1,5 +1,5 @@
 import React from "react"
-import recipes from "@/data/recipes" // Import your recipe data
+import recipes from "@/data/recipes/recipes" // Import your recipe data
 import { RecipeTemplate } from "@/components/recipe.template"
 
 const getRecipeData = async (slug: string) => {

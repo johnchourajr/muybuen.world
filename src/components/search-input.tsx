@@ -4,7 +4,6 @@ import React, { useState, useEffect, useCallback } from "react"
 import { AnimatePresence, motion, useWillChange } from "framer-motion"
 import { useSearchParams, useRouter } from "next/navigation"
 import debounce from "lodash.debounce"
-import { AppContext } from "@/contexts/appContext"
 
 export const dynamic = "force-dynamic"
 
@@ -14,20 +13,14 @@ type Prediction = {
 
 type SearchFormProps = {
   onSearch: (location: string) => void
+  number?: number
 }
 
-const SearchInput = ({ onSearch }: SearchFormProps) => {
+const SearchInput = ({ onSearch, number }: SearchFormProps) => {
   const ref = React.useRef<HTMLDivElement>(null)
-  const {
-    apiEnabledAutoComplete,
-    setApiEnabledAutoComplete,
-    apiCountAutocomplete,
-    setApiCountAutocomplete,
-  } = React.useContext(AppContext)
   const willChange = useWillChange()
 
   const [input, setInput] = useState<string>("")
-  const [apiEnabled, setApiEnabled] = useState<boolean>(true)
   const [predictions, setPredictions] = useState<Prediction[]>([])
   const [isInputFocused, setIsInputFocused] = useState<boolean>(false)
 
@@ -44,7 +37,6 @@ const SearchInput = ({ onSearch }: SearchFormProps) => {
   }, [])
 
   const fetchPredictions = async (inputValue: string) => {
-    if (!apiEnabled) return
     try {
       const response = await fetch(
         `/api/search/googleautocomplete?input=${encodeURIComponent(
@@ -56,7 +48,6 @@ const SearchInput = ({ onSearch }: SearchFormProps) => {
       }
       const data = await response.json()
       setPredictions(data.data.predictions)
-      setApiCountAutocomplete(apiCountAutocomplete + 1)
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message)
@@ -96,6 +87,29 @@ const SearchInput = ({ onSearch }: SearchFormProps) => {
     }
   }
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(event.target.value)
+    setIsInputFocused(true)
+  }
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      event.preventDefault() // Prevent the default action for Enter key
+      if (predictions.length > 0) {
+        // If there are predictions, select the first one
+        handlePredictionSelect(predictions[0])
+      } else {
+        // Otherwise, directly use the input for search
+        router.push(`/?find=${encodeURIComponent(input)}`)
+        onSearch(input)
+        setIsInputFocused(false) // Optionally, remove focus from the input
+      }
+    }
+    if (event.key === "Escape") {
+      setIsInputFocused(false)
+    }
+  }
+
   return (
     <motion.div
       ref={ref}
@@ -106,14 +120,22 @@ const SearchInput = ({ onSearch }: SearchFormProps) => {
       transition={{ duration: 0.7, type: "spring" }}
       style={{ willChange }}
     >
+      <AnimatePresence>
+        {number && (
+          <motion.div className="absolute text-xs right-0 h-full flex items-center px-4 opacity-50">
+            <p className="">{number} results</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <motion.input
         type="text"
         value={input}
-        onChange={(e) => setInput(e.target.value)}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
         onFocus={() => setIsInputFocused(true)}
         placeholder="Enter a location"
         className={clsx(
-          "w-full p-3 px-5 border-0 focus:ring-0 focus:outline-none text-xl bg-[transparent]",
+          "w-full p-3 px-5 pr-24 border-0 focus:ring-0 focus:outline-none text-xl bg-[transparent]",
           "placeholder:text-tertiary",
         )}
         autoFocus

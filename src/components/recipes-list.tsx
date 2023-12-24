@@ -1,5 +1,5 @@
 "use client"
-import recipesData from "@/data/recipes"
+import recipesData from "@/data/recipes/recipes"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import clsx from "clsx"

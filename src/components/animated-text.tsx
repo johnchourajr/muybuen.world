@@ -57,9 +57,8 @@ export const TextWrap: React.FC<TextWrapProps> = ({ text, ...extra }) => {
                   initial={"initial"}
                   animate={"animate"}
                   exit={"initial"}
-                  data-delay={d}
                   transition={{
-                    delay: d,
+                    // delay: d,
                     duration: duration,
                     ease: "linear",
                     repeat: Infinity,

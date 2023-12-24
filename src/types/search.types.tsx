@@ -1,6 +1,7 @@
 "use client"
 export type Business = {
   alias: string
+  buentag: string
   categories: any
   coordinates: any
   display_phone: string
@@ -27,9 +28,5 @@ export type Business = {
   url: string
 }
 export type SearchResult = {
-  data: {
-    businesses: Business[]
-    region: any
-    total: number
-  }
+  data: Business[]
 }

@@ -7,12 +7,14 @@ export type ResultTileProps = {
   children?: React.ReactNode
   className?: string
   href: string
+  uid?: string
 }
 
 export const ResultTile = ({
   children,
   className,
   href = "",
+  uid,
   ...extra
 }: ResultTileProps) => {
   const willChange = useWillChange()
@@ -35,8 +37,10 @@ export const ResultTile = ({
   return (
     <MotionLink
       href={href}
+      target="_blank"
+      rel="noopener noreferrer"
       className={clsx(
-        "glass-card glass-card--light-blue",
+        "glass-card glass-card--light-blue overflow-hidden",
         "min-h-[13rem] md:min-h-[18rem] w-[13rem] md:w-[18rem]",
         "relative flex flex-col h-full md:py-7 py-5 md:px-9 px-6 rounded-3xl",
         children && "bg-primaryLight",

@@ -14,21 +14,23 @@ export const SearchContainer = () => {
         throw new Error("Search failed")
       }
       const data: SearchResult = await response.json()
-      setSearchResults(data.data.businesses) // Yelp API returns businesses in a 'businesses' array
-      // console.log(data);
+      setSearchResults(data.data) // Yelp API returns businesses in a 'businesses' array
+      // console.log(data)
     } catch (error) {
       console.error("Failed to fetch:", error)
     }
   }
 
+  const results = searchResults?.filter((item) => item.rating > 4) || []
+
   return (
     <>
       <div className="grid-container">
         <div className="col-span-full pt-0 pb-6 relative z-20">
-          <SearchInput onSearch={handleSearch} />
+          <SearchInput onSearch={handleSearch} number={results?.length} />
         </div>
       </div>
-      <SearchResults searchResults={searchResults} />
+      <SearchResults searchResults={results} />
     </>
   )
 }
