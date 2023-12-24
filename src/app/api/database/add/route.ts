@@ -1,5 +1,5 @@
 // app/api/database/add/route.ts
-import type { NextApiRequest, NextApiResponse } from "next"
+import { NextRequest, NextResponse } from "next/server"
 import { Pool } from "pg"
 
 const TABLE = process.env.NEXT_PUBLIC_RETOOL_DB_TABLE
@@ -10,15 +10,26 @@ const pool = new Pool({
 
 // id,audience,confirmation_sent_at,confirmed_at,created_at,email,role,updated_at,url,user_metadata
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
+export async function POST(req: NextRequest, res: NextResponse) {
   if (req.method !== "POST") {
     // console.log(req);
 
-    return res.status(405).json({ message: "Only POST requests are allowed" })
+    return new NextResponse(JSON.stringify({ error: "Method not allowed" }), {
+      status: 405,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
   }
 
   try {
-    const userData = req.body
+    const body = await req.json()
+    if (!body) {
+      throw new Error("Request body is empty")
+    }
+
+    // Assuming 'body' is of a specific type, replace 'any' with your actual type
+    const userData: any = body
 
     // SQL Query to check if user exists
     const checkUserQuery = `SELECT * FROM ${TABLE} WHERE id = $1`
@@ -61,9 +72,22 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
       ])
     }
 
-    res.status(200).json({ message: "User data processed successfully." })
+    return new NextResponse(JSON.stringify({ message: "Success" }), {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
   } catch (error) {
     console.error("Error processing user data:", error)
-    res.status(500).json({ error: "Internal Server Error" })
+    return new NextResponse(
+      JSON.stringify({ message: "Internal Server Error" }),
+      {
+        status: 500,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    )
   }
 }

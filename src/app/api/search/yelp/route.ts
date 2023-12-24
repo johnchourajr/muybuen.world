@@ -5,13 +5,23 @@ export async function GET(request: Request) {
   const location = searchParams.get("location")
   const url = `https://api.yelp.com/v3/businesses/search?term=coffee&categories=coffee&range=5000&location=${location}`
 
-  const res = await fetch(url, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_YELP_API_KEY}`,
-    },
-  })
-  const data = await res.json()
+  try {
+    const res = await fetch(url, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_YELP_API_KEY}`,
+      },
+    })
+    const data = await res.json()
 
-  return Response.json({ data })
+    return Response.json({ data })
+  } catch (error) {
+    console.error("Error processing user data:", error)
+    return new Response(JSON.stringify({ message: "Internal Server Error" }), {
+      status: 500,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+  }
 }

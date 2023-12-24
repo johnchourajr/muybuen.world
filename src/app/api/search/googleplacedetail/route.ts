@@ -1,11 +1,8 @@
 // app/api/search/google.ts
-import type { NextApiRequest, NextApiResponse } from "next"
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
-  const { place_id } = req.query
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url)
+  const place_id = searchParams.get("place_id")
 
   const url = new URL("https://maps.googleapis.com/maps/api/place/details/json")
   url.searchParams.append("place_id", `${place_id}`)
@@ -21,10 +18,14 @@ export default async function handler(
     }
 
     const data = await response.json()
-    res.status(200).json(data)
+    return Response.json(data)
   } catch (error) {
-    if (error instanceof Error) {
-      res.status(500).json({ message: error.message })
-    }
+    console.error("Error processing user data:", error)
+    return new Response(JSON.stringify({ message: "Internal Server Error" }), {
+      status: 500,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
   }
 }
