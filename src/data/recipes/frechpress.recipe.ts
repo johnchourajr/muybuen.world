@@ -1,7 +1,7 @@
 // "use client";
 
-import { frenchPressMath } from "@/lib/buen-func/frenchPressMath";
-import { Recipe } from "@/types/recipeData.types";
+import { frenchPressMath } from "@/lib/buen-func/frenchPressMath"
+import { Recipe } from "@/types/recipeData.types"
 
 const frenchPressRecipe: Recipe = {
   title: "French Press",
@@ -120,6 +120,6 @@ const frenchPressRecipe: Recipe = {
     },
   ],
   long_steps: "...",
-};
+}
 
-export default frenchPressRecipe;
+export default frenchPressRecipe

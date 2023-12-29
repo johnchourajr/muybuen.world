@@ -1,46 +1,47 @@
-import type { Config } from "tailwindcss";
-import type { Levels } from "./src/components/headline";
-import type { BuenType } from "./src/lib/buen-type/generateBuenType";
+import type { Config } from "tailwindcss"
+import type { Levels } from "./src/components/headline"
+import type { BuenType } from "./src/lib/buen-type/generateBuenType"
 
-const defaultTheme = require("tailwindcss/defaultTheme");
+const defaultTheme = require("tailwindcss/defaultTheme")
 
 const {
   generateBuenTypeCustomProperties,
   generateBuenType,
-} = require("./src/lib/buen-type/"); // Adjust the path as needed
+} = require("./src/lib/buen-type/") // Adjust the path as needed
 
 const buenTypePlugin = function ({ addUtilities }: any) {
   const fluidTypeStyles = generateBuenType({
     levels: ["sm", "md", "lg", "xl", "2xl", "3xl", "4xl", "5xl"] as string[] &
       Levels,
     maxRatio: 1.3,
-  }) as BuenType;
-  const customProperties = generateBuenTypeCustomProperties(fluidTypeStyles);
+    minRatio: 1.2,
+  }) as BuenType
+  const customProperties = generateBuenTypeCustomProperties(fluidTypeStyles)
 
-  const utilities = {} as any;
+  const utilities = {} as any
 
   for (const [property, value] of Object.entries(customProperties)) {
     utilities[`.${property}`] = {
       "--buen-font-size": value,
-    };
+    }
   }
 
   for (const [level, fontSize] of Object.entries(fluidTypeStyles)) {
     const letterSpacing = () => {
-      if (level === "sm") return "0";
-      if (level === "md") return "0";
-      return "-0.02em";
-    };
+      if (level === "sm") return "0"
+      if (level === "md") return "0"
+      return "-0.02em"
+    }
 
     utilities[`.text-buen-${level}`] = {
       fontSize,
       lineHeight: 1,
       letterSpacing: letterSpacing(),
-    };
+    }
   }
 
-  addUtilities(utilities, ["responsive", "hover"]);
-};
+  addUtilities(utilities, ["responsive", "hover"])
+}
 
 const colors = {
   primary: {
@@ -71,39 +72,11 @@ const colors = {
     DEFAULT: "rgb(237, 238, 248)",
     50: "rgba(237, 238, 248, 0.5)",
   },
-};
-
-// const darkColors = {
-//   primary: {
-//     DEFAULT: "rgb(33, 109, 255)",
-//     50: "rgba(33, 109, 255, 0.5)",
-//   },
-//   primaryLight: {
-//     DEFAULT: "rgba(223, 229, 255, 0.68)",
-//   },
-//   secondary: {
-//     DEFAULT: "rgb(0, 211, 172)",
-//     50: "rgba(0, 211, 172, 0.5)",
-//   },
-//   secondaryLight: {
-//     DEFAULT: "rgba(217, 237, 242, 0.8)",
-//   },
-//   tertiary: {
-//     DEFAULT: "rgb(0, 0, 22)",
-//     50: "rgba(0, 0, 0, 0.5)",
-//     10: "rgba(0, 0, 0, 0.1)",
-//   },
-//   tertiaryLight: {
-//     DEFAULT: "rgb(231, 231, 231)",
-//     50: "rgba(231, 231, 231, 0.5)",
-//     10: "rgba(231, 231, 231, 0.1)",
-//   },
-
-//   ground: {
-//     DEFAULT: "rgb(21, 21, 21)",
-//     50: "rgba(21, 21, 21, 0.5)",
-//   },
-// };
+  white: {
+    DEFAULT: "rgb(255, 255, 255)",
+    50: "rgba(255, 255, 255, 0.5)",
+  },
+}
 
 const config: Config = {
   content: [
@@ -140,5 +113,5 @@ const config: Config = {
     },
   },
   darkMode: "media",
-};
-export default config;
+}
+export default config

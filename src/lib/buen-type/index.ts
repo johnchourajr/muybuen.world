@@ -4,12 +4,12 @@ import {
   generateBuenTypeCustomProperties,
   BuenTypeOptions,
   BuenType,
-} from "./generateBuenType";
+} from "./generateBuenType"
 
 export {
   generateBuenType,
   generateBuenTypeCustomProperties,
   DEFAULTS as buenTypeDefaults,
-};
+}
 
-export type { BuenTypeOptions, BuenType };
+export type { BuenTypeOptions, BuenType }

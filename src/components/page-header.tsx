@@ -1,5 +1,5 @@
 export interface PageHeaderProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export const PageHeader: React.FC<PageHeaderProps> = ({
@@ -12,7 +12,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
         <h2 className="text-buen-3xl">{children}</h2>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PageHeader;
+export default PageHeader

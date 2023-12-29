@@ -1,27 +1,27 @@
-"use client";
-import clsx from "clsx";
-import { Headline } from "./headline";
-import { motion } from "framer-motion";
-import Link from "next/link";
-import { Result } from "postcss";
-import { Fragment } from "react";
+"use client"
+import clsx from "clsx"
+import { Headline } from "./headline"
+import { motion } from "framer-motion"
+import Link from "next/link"
+import { Result } from "postcss"
+import { Fragment } from "react"
 
 // a component that splits each character into a span
 export interface TextWrapProps {
-  text: string;
+  text: string
 }
 
 export const TextWrap: React.FC<TextWrapProps> = ({ text, ...extra }) => {
-  const textArray = text.split("");
+  const textArray = text.split("")
   const indexedCharacters = textArray.map((char, index) => {
-    return { char, index };
-  });
+    return { char, index }
+  })
 
   // console.log(textArray);
-  const firstPart = indexedCharacters.slice(0, 9);
-  const secondPart = indexedCharacters.slice(9);
+  const firstPart = indexedCharacters.slice(0, 9)
+  const secondPart = indexedCharacters.slice(9)
 
-  const result = [firstPart, secondPart];
+  const result = [firstPart, secondPart]
 
   const variants = {
     initial: {
@@ -30,16 +30,16 @@ export const TextWrap: React.FC<TextWrapProps> = ({ text, ...extra }) => {
     animate: {
       fontWeight: 50,
     },
-  };
+  }
 
-  const duration = 8;
+  const duration = 8
 
   // take duration and divide by textArray.length then multiply by index
   const delay = (index: number) => {
-    const calc = duration / textArray.length;
-    const result = calc * index;
-    return result;
-  };
+    const calc = duration / textArray.length
+    const result = calc * index
+    return result
+  }
 
   return (
     <>
@@ -47,7 +47,7 @@ export const TextWrap: React.FC<TextWrapProps> = ({ text, ...extra }) => {
         return (
           <span key={i}>
             {section.map(({ char, index }, idx) => {
-              const d = delay(index);
+              const d = delay(index)
 
               return (
                 <motion.span
@@ -57,9 +57,8 @@ export const TextWrap: React.FC<TextWrapProps> = ({ text, ...extra }) => {
                   initial={"initial"}
                   animate={"animate"}
                   exit={"initial"}
-                  data-delay={d}
                   transition={{
-                    delay: d,
+                    // delay: d,
                     duration: duration,
                     ease: "linear",
                     repeat: Infinity,
@@ -69,15 +68,15 @@ export const TextWrap: React.FC<TextWrapProps> = ({ text, ...extra }) => {
                 >
                   {char}
                 </motion.span>
-              );
+              )
             })}
             {"\r"}
           </span>
-        );
+        )
       })}
     </>
-  );
-};
+  )
+}
 
 export interface AnimatedHeaderProps {}
 
@@ -86,7 +85,7 @@ export const AnimatedHeader: React.FC<AnimatedHeaderProps> = ({ ...extra }) => {
     <Link
       href={"/"}
       className={clsx(
-        "w-full h-[30vw] md:h-[8vw] overflow-hidden relative inline-flex items-center justify-center"
+        "w-full h-[30vw] md:h-[8vw] overflow-hidden relative inline-flex items-center justify-center",
       )}
       aria-label="Muy Buen Coffee Logo"
     >
@@ -94,11 +93,11 @@ export const AnimatedHeader: React.FC<AnimatedHeaderProps> = ({ ...extra }) => {
         level={"5xl"}
         font="rulik"
         className={clsx(
-          "absolute !text-[20vw] md:!text-[12vw] inline-block md:whitespace-nowrap text-center !leading-[.75] text-secondary"
+          "absolute !text-[20vw] md:!text-[12vw] inline-block md:whitespace-nowrap text-center !leading-[.75] text-secondary",
         )}
       >
         <TextWrap text={"Muy Buen © Coffee"} />
       </Headline>
     </Link>
-  );
-};
+  )
+}

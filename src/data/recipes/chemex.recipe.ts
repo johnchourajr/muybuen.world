@@ -1,7 +1,7 @@
 // "use client";
 
-import { chemexMath } from "@/lib/buen-func/chemexMath";
-import { Recipe } from "@/types/recipeData.types";
+import { chemexMath } from "@/lib/buen-func/chemexMath"
+import { Recipe } from "@/types/recipeData.types"
 
 const chemexRecipe: Recipe = {
   title: "Chemex",
@@ -114,6 +114,6 @@ const chemexRecipe: Recipe = {
   ],
   long_steps:
     "Measure **0**{:.chemex-coffeegrams}g of coffee, and grind **medium-coarse**. Bring **0**{:.chemex-water}g of water to a boil (or 190°f). Rinse filter, place grounds in top of chemex and pour a preinfusion of **0**{:.chemex-water}g. Wait 15-30 seconds. Zero the scale, and pour water over grounds to **0**{:.chemex-pour1}g in a circlular motion. Once the previous pour has drained, continue pouring to **0**{:.chemex-pour2}g. Lastly, once the final pour has drained, discard the coffee filter and add a **0**{:.chemex-bypass}g bypass pour directly into the brewed coffee.",
-};
+}
 
-export default chemexRecipe;
+export default chemexRecipe

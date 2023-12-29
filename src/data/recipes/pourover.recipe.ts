@@ -1,7 +1,7 @@
 // "use client";
 
-import { pouroverMath } from "@/lib/buen-func/pouroverMath";
-import { Recipe } from "@/types/recipeData.types";
+import { pouroverMath } from "@/lib/buen-func/pouroverMath"
+import { Recipe } from "@/types/recipeData.types"
 
 const pouroverRecipe: Recipe = {
   title: "Pour Over",
@@ -109,6 +109,6 @@ const pouroverRecipe: Recipe = {
     },
   ],
   long_steps: "...",
-};
+}
 
-export default pouroverRecipe;
+export default pouroverRecipe

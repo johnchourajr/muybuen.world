@@ -1,10 +1,10 @@
-import PageHeader from "@/components/page-header";
+import PageHeader from "@/components/page-header"
 
 export default function AboutPage() {
   const intro =
-    "Muy Buen Coffee is created with love and care (and coffee) by John Choura in Long Beach, CA.";
+    "Muy Buen Coffee is created with love and care (and coffee) by John Choura in Long Beach, CA."
   const body =
-    "This site was born out of socal.coffee, a platform that originally aimed to highlight exceptional coffee places in Southern California. Over time, the site evolved to include recipes, but managing the expanding content became overwhelming, and it fell out of date. Determined to expand beyond Southern California, Muy Buen Coffee emerged as a fresh and exciting project.";
+    "This site was born out of socal.coffee, a platform that originally aimed to highlight exceptional coffee places in Southern California. Over time, the site evolved to include recipes, but managing the expanding content became overwhelming, and it fell out of date. Determined to expand beyond Southern California, Muy Buen Coffee emerged as a fresh and exciting project."
 
   return (
     <>
@@ -17,5 +17,5 @@ export default function AboutPage() {
       </div>
       <br />
     </>
-  );
+  )
 }
