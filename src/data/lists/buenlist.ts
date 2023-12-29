@@ -3,4 +3,6 @@ export const buenlist = [
   "mangette-long-beach",
   "good-time-long-beach",
   "hopper-and-burr-santa-ana-2",
+  "stereoscope-coffee",
+  "steelhead-coffee-long-beach",
 ]

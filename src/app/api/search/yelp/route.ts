@@ -23,20 +23,33 @@ export async function GET(request: Request) {
       const normalResults = [] as Business[]
       const shitResults = [] as Business[]
 
-      data.forEach((shop: Business) => {
-        if (buenlist.includes(shop.alias)) {
-          buenResults.push({ ...shop, buentag: "buen" })
-        } else if (shitlist.includes(shop.alias)) {
-          shitResults.push({
-            ...shop,
-            buentag: "shitlist",
-          })
-        } else if (blacklist.includes(shop.alias)) {
+      data.forEach((shop) => {
+        // Check if shop.alias contains any word in buenlist
+        const isInBuenlist = buenlist.some((keyword) =>
+          shop.alias.includes(keyword),
+        )
+        const isInShitlist = shitlist.some((keyword) =>
+          shop.alias.includes(keyword),
+        )
+        const isInBlacklist = blacklist.some((keyword) =>
+          shop.alias.includes(keyword),
+        )
+
+        if (isInBlacklist) {
+          // Skip adding to any list
           return null
+        } else if (isInBuenlist) {
+          buenResults.push({ ...shop, buentag: "buen" })
+        } else if (isInShitlist) {
+          shitResults.push({ ...shop, buentag: "shitlist" })
         } else {
           normalResults.push(shop)
         }
       })
+
+      // order buenResults and normalResults by distance
+      buenResults.sort((a, b) => a.distance - b.distance)
+      normalResults.sort((a, b) => a.distance - b.distance)
 
       return [...buenResults, ...normalResults, ...shitResults]
     }

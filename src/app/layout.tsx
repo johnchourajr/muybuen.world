@@ -6,6 +6,9 @@ import clsx from "clsx"
 import { Layout } from "@/components/layout"
 import AuthContextProvider from "@/contexts/authContext"
 import AppContextProvider from "@/contexts/appContext"
+import Head from "next/head"
+import { usePathname } from "next/navigation"
+import { useEffect } from "react"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 
@@ -32,6 +35,17 @@ export const metadata: Metadata = {
   ],
 }
 
+{
+  /* <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRTQYLBHFZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DRTQYLBHFZ');
+</script> */
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -41,6 +55,25 @@ export default function RootLayout({
     <AppContextProvider>
       <AuthContextProvider>
         <html lang="en">
+          <Head>
+            {/* Global Site Tag (gtag.js) - Google Analytics */}
+            <script
+              async
+              src="https://www.googletagmanager.com/gtag/js?id=G-DRTQYLBHFZ"
+            ></script>
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-DRTQYLBHFZ', {
+                page_path: window.location.pathname,
+              });
+            `,
+              }}
+            />
+          </Head>
           <body
             className={clsx(inter.variable, rulik.variable, "min-h-screen")}
           >

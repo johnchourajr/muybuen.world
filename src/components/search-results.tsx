@@ -11,14 +11,20 @@ export type SearchResultsProps = {
 }
 
 export const SearchResults = ({ searchResults }: SearchResultsProps) => {
-  // eliminate items from search results with a rating of 4 or less
-
   return (
     <>
-      <ScrollXWrapper disableScroll={!searchResults}>
-        {searchResults
+      <ScrollXWrapper
+        disableScroll={
+          searchResults && searchResults?.length <= 0 ? true : false
+        }
+      >
+        {searchResults && searchResults?.length > 0
           ? searchResults.map((result, index) => {
               console.log(result)
+
+              // convert meters to miles
+              const miles = (result.distance * 0.000621371192).toFixed(2)
+              // round to 2 decimal places
 
               return (
                 <ResultTile
@@ -29,29 +35,35 @@ export const SearchResults = ({ searchResults }: SearchResultsProps) => {
                 >
                   <div
                     className={clsx(
-                      "z-[-1] w-full h-56 relative",
-                      "bg-primary -opacity-10",
                       "md:py-7 py-5 md:px-9 px-6",
+                      "z-[-1] w-full h-48 relative mix-blend-multiply",
                     )}
                   >
-                    <h2 className="text-white text-3xl">{result.name}</h2>
+                    <h2 className="text-primary text-2xl">{result.name}</h2>
                     <div
                       className={clsx(
+                        "bg-secondary",
                         "absolute inset-0 z-[-1]",
-                        "bg-primary mix-blend-hard-light",
                       )}
-                    />
-                    <Image
-                      className={clsx(
-                        "absolute inset-0 z-[-2]",
-                        "mix-blend-lighten",
-                      )}
-                      src={result.image_url}
-                      alt={result.name}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      objectFit="cover"
-                    />
+                    >
+                      <div
+                        className={clsx(
+                          "absolute inset-0 ",
+                          "bg-secondary mix-blend-hard-light",
+                        )}
+                      />
+                      <Image
+                        className={clsx(
+                          "absolute inset-1 z-[-2]",
+                          "mix-blend-screen",
+                        )}
+                        src={result.image_url}
+                        alt={result.name}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        objectFit="cover"
+                      />
+                    </div>
                   </div>
                   <div className="md:py-7 py-5 md:px-9 px-6 ">
                     <p>
@@ -61,6 +73,7 @@ export const SearchResults = ({ searchResults }: SearchResultsProps) => {
                     </p>
                     <p>{result.rating} Stars</p>
                     <p>{result.review_count} Reviews</p>
+                    <p>{miles} miles</p>
                     {result.buentag && <p>{result.buentag}</p>}
                   </div>
                 </ResultTile>
