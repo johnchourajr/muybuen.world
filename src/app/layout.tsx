@@ -4,8 +4,6 @@ import localFont from "next/font/local"
 import "./globals.css"
 import clsx from "clsx"
 import { Layout } from "@/components/layout"
-import AuthContextProvider from "@/contexts/authContext"
-import AppContextProvider from "@/contexts/appContext"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 
@@ -17,9 +15,9 @@ const rulik = localFont({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://muybuen.coffee"),
-  title: "Muy Buen Coffee",
-  description: "Find buen coffee, make buen coffee.",
+  metadataBase: new URL("https://muybuen.world"),
+  title: "Muy Buen World",
+  description: "A Muy Buen World",
   openGraph: {
     images: "/images/og.png",
   },
@@ -38,16 +36,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <AppContextProvider>
-      <AuthContextProvider>
-        <html lang="en">
-          <body
-            className={clsx(inter.variable, rulik.variable, "min-h-screen")}
-          >
-            <Layout>{children}</Layout>
-          </body>
-        </html>
-      </AuthContextProvider>
-    </AppContextProvider>
+    <html lang="en">
+      <body className={clsx(inter.variable, rulik.variable, "min-h-screen")}>
+        <Layout>{children}</Layout>
+      </body>
+    </html>
   )
 }

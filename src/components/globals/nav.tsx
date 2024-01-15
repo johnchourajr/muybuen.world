@@ -5,13 +5,10 @@ import Link from "next/link"
 import { NavLink } from "../nav-link"
 import LogoIcon from "../svg/icon"
 import { usePathname } from "next/navigation"
-import { useContext } from "react"
-import { AuthContext } from "@/contexts/authContext"
 
 export interface NavProps {}
 
 export const Nav: React.FC<NavProps> = ({ ...extra }) => {
-  const { user, login, logout } = useContext(AuthContext)
   const router = usePathname()
 
   // console.log({ user });
@@ -19,17 +16,22 @@ export const Nav: React.FC<NavProps> = ({ ...extra }) => {
   const links = [
     {
       href: "/",
-      label: "Find",
-    },
-    {
-      href: "/recipes",
-      label: "Brew",
+      label: "About",
     },
   ]
 
   return (
-    <>
-      <nav className="grid-container w-[calc(100%-1rem)] glass-card glass-card--gray py-5 items-center fixed md:sticky top-[unset] z-50 md:top-12 bottom-3 md:translate-y-[-50%] mx-2 md:mx-auto ">
+    <div
+      className={clsx(
+        "w-full relative flex",
+        "fixed md:fixed z-50 md:bottom-4 md:translate-y-[-50%] ",
+      )}
+    >
+      <nav
+        className={clsx(
+          "grid-container w-[calc(100%-1rem)] glass-card glass-card--gray py-5 items-center mx-2 md:mx-auto ",
+        )}
+      >
         <Link href="/" aria-label="Logo">
           <LogoIcon className="col-span-1" />
         </Link>
@@ -52,10 +54,8 @@ export const Nav: React.FC<NavProps> = ({ ...extra }) => {
               </NavLink>
             )
           })}
-          {/* {!user && <button onClick={login}>Login/Signup</button>}
-          {user && <button onClick={logout}>Logout</button>} */}
         </div>
       </nav>
-    </>
+    </div>
   )
 }

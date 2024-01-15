@@ -23,8 +23,8 @@ export const Layout: React.FC<LayoutProps> = ({ children, ...extra }) => {
   return (
     <>
       <AnimatedHeader />
-      <Nav />
       <main className="pb-20">{children}</main>
+      <Nav />
       <Footer />
       <GtagScripts />
     </>
